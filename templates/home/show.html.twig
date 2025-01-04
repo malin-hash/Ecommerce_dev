@@ -1,0 +1,326 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<header class="header shop">
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-12 col-12">
+                    <!-- Top Left -->
+                    <div class="top-left">
+                        <ul class="list-main">
+                            <li><i class="ti-headphone-alt"></i> (+236) 74427249</li>
+                            <li><i class="ti-email"></i> mokosseakowo@gmail.com</li>
+                        </ul>
+                    </div>
+                    <!--/ End Top Left -->
+                </div>
+                <div class="col-lg-7 col-md-12 col-12">
+                    <!-- Top Right -->
+                    <div class="right-content">
+                        <ul class="list-main">
+                            {% if (app.user) %}
+                            <li><a href="{{path('app_logout')}}"><i class="ti-power-off"></i> Se déconnecter</a></li>
+                            {% else %}
+                            <li><a href="{{path('app_login')}}"><i class="ti-power-off"></i> Connectez-vous</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <!-- End Top Right -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Topbar -->
+    <div class="middle-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-12">
+                    <!-- Logo -->
+                    <!--/ End Logo -->
+                    <!-- Search Form -->
+                    <div class="search-top">
+                        <div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
+                        <!-- Search Form -->
+                        <div class="search-top">
+                            <form class="search-form">
+                                <input type="text" placeholder="Rechercher ici..." name="search">
+                                <button value="search" type="submit"><i class="ti-search"></i></button>
+                            </form>
+                        </div>
+                        <!--/ End Search Form -->
+                    </div>
+                    <!--/ End Search Form -->
+                    <div class="mobile-nav"></div>
+                </div>
+                <div class="col-lg-8 col-md-7 col-12">
+                    <div class="search-bar-top">
+                        <div class="search-bar">
+                           
+                            <form>
+                                <input name="search" placeholder="Rechercher les produits ici....." type="search">
+                                <button class="btnn"><i class="ti-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-12">
+                    <div class="right-bar">
+                        <!-- Search Form -->
+                        <div class="sinlge-bar">
+                            <a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="sinlge-bar shopping">
+                            <a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count">2</span></a>
+                            <!-- Shopping Item -->
+                            <div class="shopping-item">
+                                <div class="dropdown-cart-header">
+                                    <span>2 Articles</span>
+                                    <a href="#">Voir le panier</a>
+                                </div>
+                                <ul class="shopping-list">
+                                    <li>
+                                        <a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
+                                        <a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
+                                        <h4><a href="#">Nom produit</a></h4>
+                                        <p class="quantity">quantité - <span class="amount">$99.00</span></p>
+                                    </li>
+                                </ul>
+                                <div class="bottom">
+                                    <div class="total">
+                                        <span>Totals</span>
+                                        <span class="total-amount">$134.00</span>
+                                    </div>
+                                    <a href="checkout.html" class="btn animate">Acheter Maintenant</a>
+                                </div>
+                            </div>
+                            <!--/ End Shopping Item -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header Inner -->
+    <div class="header-inner">
+        <div class="container">
+            <div class="cat-nav-head">
+                <div class="row">
+                    
+                    <div class="col-lg-9 col-12">
+                        <div class="menu-area">
+                            <!-- Main Menu -->
+                            <nav class="navbar navbar-expand-lg">
+                                <div class="navbar-collapse">	
+                                    <div class="nav-inner">	
+                                        <ul class="nav main-menu menu navbar-nav">
+                                                <li><a href="{{path('app_home')}}">Acceuil</a></li>
+                                                <li ><a href="#">Produit</a></li>												
+                                                <li class="active" ><a href="#">Détail</a></li>												
+                                                {% if  (app.getUser) %}
+                                                    {% if  (app.user.roles) != ['ROLE_USER'] %}
+                                                         <li><a href="{{path('app_admin_index')}}">Administration</a></li>
+                                                    {% endif %}
+                                                {% endif %}
+                                            </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                            <!--/ End Main Menu -->	
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ End Header Inner -->
+</header>
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bread-inner">
+                    <ul class="bread-list">
+                        <li><a href="{{path('app_home')}}">Acceuil<i class="ti-arrow-right"></i></a></li>
+                        <li class="active"><a href="blog-single.html">{{product.name}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+
+<div class="container">
+    <div class="card mb-12 mt-4 mb-4">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{asset('images/products/'~product.imagename)}}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h2 class="card-title">{{product.name}}</h2>
+              <h5><p class="card-text">{{product.description}}.</p></h5>
+              <p class="card-text"><small class="text-body-secondary">{{product.price}} fcfa</small></p>
+              <button style="border-radius: 2rem;" type="submit" class="btn btn-outline-success mt-5"><a href="{{path('app_cart_add', {id: product.id})}}">Ajouter au panier</a></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+{# <div class="row">
+    {% for category in categories %}    
+<div class="card m-3" style="width: 16rem;">
+    <a href="{{path('app_home_show', { id: category.id })}}">
+    <img src="{{asset('images/products/'~category.imagename)}}" class="card-img-top" alt="...">
+    </a>
+    <div class="card-body">
+      <h5 class="card-title">{{category.name}}</h5>
+      <p class="card-text">{{category.description}}</p>
+      <h4> <p class="card-text" style="color: green;">{{category.price}} fcfa</p></h4>
+      <button style="border-radius: 2rem;" type="submit" class="btn btn-outline-success mt-5">Ajouter au panier</button>
+    </div>
+  </div>
+{% endfor %}
+</div> #}
+<div class="product-area most-popular section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    <h2>Mes Produits</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="owl-carousel popular-slider">
+                    <!-- Start Single Product -->
+                    {% for category in categories %}
+                    <div class="single-product">
+                        <div class="product-img">
+                            <a href="{{path('app_home_show', { id: category.id })}}">
+                                <img class="default-img" src="{{asset('images/products/')~category.imagename}}" alt="#">
+                                <img class="hover-img" src="{{asset('images/products/')~category.imagename}}" alt="#">
+                                <span class="out-of-stock">Hot</span>
+                            </a>
+                            <div class="button-head">
+                                <div class="product-action">
+                                    <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class="ti-bag"></i><span>Ajouter au panier</span></a>
+                                    <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Liker</span></a>
+                                </div>
+                                <div class="product-action-2">
+                                    <a title="Add to cart" href="#">Ajouter au panier</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3><a href="{{path('app_home_show', { id: category.id })}}">{{category.name}}</a></h3>
+                            <h6 style="color: blue;">{{category.description}}</h6>
+                            <div class="product-price">
+                                <span>{{category.price}} Fcfa </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Product -->
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Map Section -->
+<footer class="footer">
+    <!-- Footer Top -->
+    <div class="footer-top section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer about">
+                        <div class="logo">
+                            <a href="index.html"><img width="150px" height="150px" src="{{asset('asset/images/malincop.png')}}" alt="#"></a>
+                        </div>
+                        <p class="call">Pour toutes vos questions appelez-nous :<span><a href="tel:74427249">+236 74427249</a></span></p>
+                    </div>
+                    <!-- End Single Widget -->
+                </div>
+                <div class="col-lg-2 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer links">
+                        <h4>Information</h4>
+                        <ul>
+                            <li><a href="#">A propos de nous</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Termes et conditions</a></li>
+                            <li><a href="#">Contactez nous</a></li>
+                            <li><a href="#">Aide</a></li>
+                        </ul>
+                    </div>
+                    <!-- End Single Widget -->
+                </div>
+                <div class="col-lg-2 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer links">
+                        <h4>Service à la clientelle</h4>
+                        <ul>
+                            <li><a href="#">Méthode de paiement</a></li>
+                            <li><a href="#">Rembourssement</a></li>
+                            <li><a href="#">Retour</a></li>
+                            <li><a href="#">Expédition</a></li>
+                        </ul>
+                    </div>
+                    <!-- End Single Widget -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer social">
+                        <h4>Entrer en contact</h4>
+                        <!-- Single Widget -->
+                        <div class="contact">
+                            <ul>
+                                <li>Républic centrafricaine.</li>
+                                <li>Bangui.</li>
+                                <li>mokosseakowoe@gmail.com</li>
+                                <li>+236 74427249</li>
+                            </ul>
+                        </div>
+                        <!-- End Single Widget -->
+                        <ul>
+                            <li><a href="#"><i class="ti-facebook"></i></a></li>
+                            <li><a href="#"><i class="ti-twitter"></i></a></li>
+                            <li><a href="#"><i class="ti-flickr"></i></a></li>
+                            <li><a href="#"><i class="ti-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- End Single Widget -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer Top -->
+    <div class="copyright">
+        <div class="container">
+            <div class="inner">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <div class="left">
+                            <p>Copyright © 2025 <a href="http://www.wpthemesgrid.com" target="_blank">Malin_Shop</a>  -  Tout droit réservé.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="right">
+                            <img src="{{asset('asset/images/payments.png')}}" alt="#">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}

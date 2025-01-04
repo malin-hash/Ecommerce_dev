@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html class="no-js" lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Malin Shop{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href=" {{asset("assets/images/favicon.png")}} " type="image/png">
+        {% block stylesheets %}
+           <link rel="stylesheet" href="{{ asset("asset/css/bootstrap.css") }}">
+           <link rel="stylesheet" href="{{ asset("asset/css/magnific-popup.min.css") }}">
+           <link rel="stylesheet" href="{{ asset("asset/css/magnific-popup.css") }}">
+           <link rel="stylesheet" href="{{ asset("asset/css/font-awesome.css") }}">
+           <link rel="stylesheet" href="{{ asset("asset/css/jquery.fancybox.min.css") }}">
+           <link rel="stylesheet" href="{{ asset("asset/css/jquery-ui.css") }}">
+           <link rel="stylesheet" href="{{ asset("asset/css/themify-icons.css") }}">
+           <link rel="stylesheet" href="{{ asset("asset/css/niceselect.css") }}">
+           <link rel="stylesheet" href="{{ asset("asset/css/nice-select.css") }}">
+           <link rel="stylesheet" href="{{ asset("asset/css/animate.css") }}">
+           <link rel="stylesheet" href="{{ asset("asset/css/flex-slider.min.css") }}">
+           <link rel="stylesheet" href="{{ asset("asset/css/owl-carousel.css") }}">
+           <link rel="stylesheet" href="{{ asset("asset/css/slicknav.min.css") }}">
+           <link rel="stylesheet" href="{{ asset("asset/css/reset.css") }}">
+           <link rel="stylesheet" href="{{ asset("asset/style.css") }}">
+           <link rel="stylesheet" href="{{ asset("asset/css/responsive.css") }}">
+        {% endblock %}
+
+        {% block javascripts %}
+            <script src="{{ asset("asset/js/jquery.min.js") }}"></script>
+            <script src="{{ asset("asset/js/jquery-migrate-3.0.0.js") }}"></script>
+            <script src="{{ asset("asset/js/jquery-ui.min.js") }}"></script>
+            <script src="{{ asset("asset/js/popper.min.js") }}"></script>
+            <script src="{{ asset("asset/js/bootstrap.min.js") }}"></script>
+            <script src="{{ asset("asset/js/colors.js") }}"></script>
+            <script src="{{ asset("asset/js/slicknav.min.js") }}"></script>
+            <script src="{{ asset("asset/js/owl-carousel.js") }}"></script>
+            <script src="{{ asset("asset/js/magnific-popup.js") }}"></script>
+            <script src="{{ asset("asset/js/waypoints.min.js") }}"></script>
+            <script src="{{ asset("asset/js/finalcountdown.min.js") }}"></script>
+            <script src="{{ asset("asset/js/nicesellect.js") }}"></script>
+            <script src="{{ asset("asset/js/flex-slider.js") }}"></script>
+            <script src="{{ asset("asset/js/scrollup.js") }}"></script>
+            <script src="{{ asset("asset/js/onepage-nav.min.js") }}"></script>
+            <script src="{{ asset("asset/js/easing.js") }}"></script>
+            <script src="{{ asset("asset/js/active.js") }}"></script>
+            /
+        {% endblock %}
+    </head>
+    <body class="js">
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>
+

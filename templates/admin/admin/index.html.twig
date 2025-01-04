@@ -1,0 +1,226 @@
+{% extends 'base2.html.twig' %}
+{% block body %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="bread-inner">
+                        <ul class="bread-list">
+                            <li><a href="index1.html">Acceuil<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="blog-single.html">Administration</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br>
+    <div class="container">
+        <div class="row">
+            <!-- Column -->
+            <div class="col-md-6 col-lg-2 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="box bg-cyan text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+                        <h6 class="text-white">Dashboard</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6 col-lg-4 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="box bg-success text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>
+                        <h6 class="text-white">Charts</h6>
+                    </div>
+                </div>
+            </div>
+             <!-- Column -->
+            <div class="col-md-6 col-lg-2 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="box bg-warning text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
+                        <h6 class="text-white">Widgets</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6 col-lg-2 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="box bg-danger text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
+                        <h6 class="text-white">Tables</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6 col-lg-2 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="box bg-info text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-arrow-all"></i></h1>
+                        <h6 class="text-white">Full Width</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <!-- Column -->
+            <div class="col-md-6 col-lg-4 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="box bg-danger text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-receipt"></i></h1>
+                        <h6 class="text-white">Forms</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6 col-lg-2 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="box bg-info text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-relative-scale"></i></h1>
+                        <h6 class="text-white">Buttons</h6>
+                    </div>
+                </div>
+            </div>
+             <!-- Column -->
+            <div class="col-md-6 col-lg-2 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="box bg-cyan text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-pencil"></i></h1>
+                        <h6 class="text-white">Elements</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6 col-lg-2 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="box bg-success text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-calendar-check"></i></h1>
+                        <h6 class="text-white">Calnedar</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6 col-lg-2 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="box bg-warning text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-alert"></i></h1>
+                        <h6 class="text-white">Errors</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex align-items-center">
+                            <div>
+                                <h4 class="card-title">Bilan</h4>
+                                <h5 class="card-subtitle">Bilan Journalier</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                           <i class="fa fa-user m-b-5 font-16"></i>
+                                           <h5 class="m-b-0 m-t-5">{{clients}}</h5>
+                                           <small class="font-light">Total Client</small>
+                                        </div><br>
+                                    </div><br>
+                                     <div class="col-6">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                           <i class="fa fa-plus m-b-5 font-16"></i>
+                                           <h5 class="m-b-0 m-t-5">120</h5>
+                                           <small class="font-light">Clients Plus actifs</small>
+                                        </div><br>
+                                    </div><br>
+                                    <div class="col-6 m-t-15">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                           <i class="fa fa-cart-plus m-b-5 font-16"></i>
+                                           <h5 class="m-b-0 m-t-5">656</h5>
+                                           <small class="font-light">Total Achats</small>
+                                        </div><br>
+                                    </div><br>
+                                     <div class="col-6 m-t-15">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                           <i class="fa fa-tag m-b-5 font-16"></i>
+                                           <h5 class="m-b-0 m-t-5">9540</h5>
+                                           <small class="font-light">Total Commandes</small>
+                                        </div><br>
+                                    </div><br>
+                                    <div class="col-6 m-t-15">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                           <i class="fa fa-table m-b-5 font-16"></i>
+                                           <h5 class="m-b-0 m-t-5">100</h5>
+                                           <small class="font-light">Commandes non Livrées</small>
+                                        </div><br>
+                                    </div><br>
+                                    <div class="col-6 m-t-15">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                           <i class="fa fa-globe m-b-5 font-16"></i>
+                                           <h5 class="m-b-0 m-t-5">8540</h5>
+                                           <small class="font-light">Commandes Livrées</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- column -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                                <h4 class="card-title m-b-0">Analyse Statistique</h4>
+                                <div class="m-t-20">
+                                    <div class="d-flex no-block align-items-center">
+                                        <span>81% Clients Actifs</span>
+                                        <div class="ml-auto">
+                                            <span>125</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="d-flex no-block align-items-center m-t-25">
+                                        <span>72% Stock</span>
+                                        <div class="ml-auto">
+                                            <span>120</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 72%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="d-flex no-block align-items-center m-t-25">
+                                        <span>53% Impressions</span>
+                                        <div class="ml-auto">
+                                            <span>785</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 53%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="d-flex no-block align-items-center m-t-25">
+                                        <span>3% Clients non Actifs</span>
+                                        <div class="ml-auto">
+                                            <span>8</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 10%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

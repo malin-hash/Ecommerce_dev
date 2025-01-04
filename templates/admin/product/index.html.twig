@@ -1,0 +1,68 @@
+{% extends 'base2.html.twig'%}
+{% block body %}
+   <!-- Shopping Cart -->
+	<div class="shopping-cart section">
+		<div class="container">
+            <div class="row">
+				<div class="col-12">
+					<!-- Total Amount -->
+					<div class="total-amount">
+						<div class="row">
+							<div class="col-lg-4 col-md-7 col-12">
+								<div class="left">
+                                    <div class="title">
+                                        <h4 style="color: orange;" ><a href="{{path('app_admin_index')}}"><i class="fas fa-arrow-left"></i> Acceuil</a></h4> 
+                                    </div>
+									<div class="button5">
+										<a style="color: white;" href="{{path('app_admin_product_addproduct')}}" class="btn">Ajouter un Produit</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--/ End Total Amount -->
+				</div>
+			</div><br>
+            {% include "_partials/_flashmessage.html.twig" %}
+			<div class="row">
+				<div class="col-12">
+					<!-- Shopping Summery -->
+					<table class="table shopping-summery">
+						<thead>
+							<tr class="main-hading">
+								<th>PRODUCT</th>
+								<th>Nom</th>
+								<th class="text-center">Prix Unitaire</th>
+								<th class="text-center">Quantité</th>
+								<th class="text-center">Description</th> 
+								<th class="text-center"><i class="ti-trash remove-icon"></i></th>
+                                <th><i class="fas fa-edit"></i> </th>
+                                <th><i class="fas fa-align-justify"></i></th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for product in products %}
+                                <tr>
+							    	<td class="image" data-title="No"><img src="{{asset('images/products/')~product.imagename}}" alt="#"></td>
+							    	<td class="product-des" data-title="Description">
+							    		<p class="product-name"><a href="#">{{product.name}}</a></p>
+							    	</td>
+							    	<td class="total-amount" data-title="Total"><span>{{product.price}} Fcfa</span></td>
+							    	<td class="qty" data-title="Qty">{{product.quantity}}</td>
+							    	<td class="product-des" data-title="Description">
+							    		<p class="product-des">{{product.description}}</p>
+							    	</td>
+							    	<td class="action" data-title="Remove"><a onclick=" return confirm('Voulez-vous Vraiment supprimer ce Produit ?')" style="color: red;" href="{{path('app_admin_product_deleteproduct', { id: product.id })}}"><i class="ti-trash remove-icon"></i></a></td>
+                                    <td><a  style="color: blue;" href="{{path('app_admin_product_updateproduct', { id: product.id })}}"><i class="fas fa-pencil-alt"></i></a></td>
+                                    <td><a  style="color: green;" href="{{path('app_admin_product_increaseproduct', { id: product.id })}}"><i class="far fa-plus-square"></i></a></td>
+							    </tr>
+                            {% endfor %}
+						</tbody>
+					</table>
+					<!--/ End Shopping Summery -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/ End Shopping Cart --> 
+{% endblock %}

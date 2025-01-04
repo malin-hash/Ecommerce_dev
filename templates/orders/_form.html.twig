@@ -1,0 +1,88 @@
+<section class="shop checkout section">
+    <div class="container">
+        {% include "_partials/_flashmessage.html.twig" %}
+        <div class="row"> 
+            <div class="col-lg-8 col-12">
+                <div class="checkout-form">
+                    <h2>Faites votre commande ici !</h2><br>
+                    <!-- Form -->
+                      <div class="form"> 
+                        {{ form_start(form) }}
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>Nom<span>*</span></label>
+                                    {{ form_row(form.name) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>Prénom<span>*</span></label>
+                                    {{ form_row(form.firstname) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>E-mail<span>*</span></label>
+                                    {{ form_row(form.email) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>Téléphone<span>*</span></label>
+                                    {{ form_row(form.phonenumber) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>Pays<span>*</span></label>
+                                    {{ form_row(form.country) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>Ville<span>*</span></label>
+                                    {{ form_row(form.City) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>Adresse<span>*</span></label>
+                                    {{ form_row(form.address) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>Postal Code<span>*</span></label>
+                                    {{ form_row(form.postalcode) }}
+                                </div>
+                            </div>
+                            <div class="single-widget get-button">
+                                <div class="content">
+                                    <button type="submit" class="btn">Validez la commande</button>
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_end(form) }} 
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-12">
+                <div class="order-details">
+                    <!-- Order Widget -->
+                    <div class="single-widget">
+                        <h2>Total Panier</h2>
+                        <div class="content">
+                            <ul>
+                                <li>Total :<span>{{total}} fcfa</span></li>
+                                <li>(+) Expédition :<span>00 fcfa</span></li>
+                                <li class="last"><strong>Net à Payer :</strong><span><strong>{{total}} fcfa</strong></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--/ End Button Widget -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

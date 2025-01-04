@@ -1,0 +1,86 @@
+{% extends 'base3.html.twig' %}
+
+{% block title %}BillController!{% endblock %}
+
+{% block body %}
+<style>
+    table{
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td{
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+    thead{
+        background: #f2f2f2;
+        font-weight: bolder;
+        color: black;
+        text-decoration: solid;
+    }
+    h3{
+        text-decoration: underline;
+    }
+</style>
+<div class="container"><hr>
+    <h2>Malin_Shop</h2>
+    <hr>
+    <span   style="font-weight: bolder;"> Facture n° : #{{order.id}}</span><br>
+    <span   style="font-weight: bolder;"> Date :  {{date|date('d M Y à h:i')}}</span>
+    <br>
+    <h3>Information du Client :</h3>
+    <table class="table table-bordered">
+        <thead>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>E-mail</th>
+            <th>Adresse</th>
+            <th>Téléphone</th>
+            <th>Pays</th>
+            <th>Ville</th>
+            <th>Code Postal</th>
+        </thead>
+        <tr>
+            <th>{{order.name}}</th>
+            <th>{{order.firstname}}</th>
+            <th>{{order.email}}</th>
+            <th>{{order.address}}</th>
+            <th>{{order.phonenumber}}</th>
+            <th>{{order.country.name}}</th>
+            <th>{{order.city.name}}</th>
+            <th>{{order.postalcode}}</th>
+        </tr>
+    </table>
+    <h3>Détails de la Commande :</h3>
+    <table class="table table-bordered">
+        <thead>
+            <th>Nom Produit</th>
+            <th>Prix Unitaire</th>
+            <th>Quantité</th>
+            <th>Prix Total</th>
+        </thead>
+        {% for item in orderdetails %}            
+            <tr>
+                <th>{{item.product.name}}</th>
+                <th>{{item.price}} fcfa</th>
+                <th>{{item.quantity}}</th>
+                <th>{{item.quantity * item.price}} fcfa</th>
+            </tr>
+        {% endfor %}
+    </table><br>
+    <span style="font-weight: bolder;">
+        Statut de la commande :
+         {% if order.iscompleted == true %}
+         Livré  le {{order.datedeliver|date('d M Y à h:i')}}
+         {% else %}
+        Non livré
+        {% endif %}
+     </span><br>
+     <span style="font-weight: bolder;" >Tax : 00 fcfa</span><br>
+     <span style="font-weight: bolder;" >Total : {{total}} fcfa</span>
+     <hr>
+     <h3>Net à Payer : {{total}} fcfa</h3>
+     <hr>
+</div>
+{% endblock %}

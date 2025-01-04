@@ -1,0 +1,277 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Orders index{% endblock %}
+
+{% block body %}
+<header class="header shop">
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-12 col-12">
+                    <!-- Top Left -->
+                    <div class="top-left">
+                        <ul class="list-main">
+                            <li><i class="ti-headphone-alt"></i> (+236) 74427249</li>
+                            <li><i class="ti-email"></i> mokosseakowo@gmail.com</li>
+                        </ul>
+                    </div>
+                    <!--/ End Top Left -->
+                </div>
+                <div class="col-lg-7 col-md-12 col-12">
+                    <!-- Top Right -->
+                    <div class="right-content">
+                        <ul class="list-main">
+                            <li> <a href="{{path('app_home')}}"><i class="fas fa-arrow-left"></i> Retour</a></li>
+                            <li><a href="#"><i class="ti-user"></i>  Mon compte</a></li>
+                            {% if (app.user) %}
+                            <li><a href="{{path('app_logout')}}"><i class="ti-power-off"></i> Se déconnecter</a></li>
+                            {% else %}
+                            <li><a href="{{path('app_login')}}"><i class="ti-power-off"></i> Connectez-vous</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <!-- End Top Right -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="middle-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-12">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="index.html"><img src="{{asset('asset/images/logo.png')}}" alt="logo"></a>
+                    </div>
+                    <!--/ End Logo -->
+                    <!-- Search Form -->
+                    <div class="search-top">
+                        <div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
+                        <!-- Search Form -->
+                        <div class="search-top">
+                            <form class="search-form">
+                                <input type="text" placeholder="Rechercher ici..." name="search">
+                                <button value="search" type="submit"><i class="ti-search"></i></button>
+                            </form>
+                        </div>
+                        <!--/ End Search Form -->
+                    </div>
+                    <!--/ End Search Form -->
+                    <div class="mobile-nav"></div>
+                </div>
+                <div class="col-lg-8 col-md-7 col-12">
+                    <div class="search-bar-top">
+                        <div class="search-bar">
+                           
+                            <form>
+                                <input name="search" placeholder="Rechercher les produits ici....." type="search">
+                                <button class="btnn"><i class="ti-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-inner">
+        <div class="container">
+            <div class="cat-nav-head">
+                <div class="row">
+                    
+                    <div class="col-lg-9 col-12">
+                        <div class="menu-area">
+                            <!-- Main Menu -->
+                            <nav class="navbar navbar-expand-lg">
+                                <div class="navbar-collapse">	
+                                    <div class="nav-inner">	
+                                        <ul class="nav main-menu menu navbar-nav">
+                                                <li class="active"><a href="{{path('app_admin_index')}}">Acceuil</a></li>
+                                                <li><a href="#">Boutique<i class="ti-angle-down"></i><span class="new">New</span></a>
+                                                    <ul class="dropdown">
+                                                        <li><a href="{{path('app_admin_product_addproduct')}}">Produit</a></li>
+                                                        <li><a href="{{path('app_admin_subcategory_addsubcategory')}}">Sous Catégorie</a></li>												
+                                                        <li><a href="{{path('app_admin_category_addcategory')}}">Catégorie</a></li>									
+                                                        <li><a href="{{path('app_admin_color_addcolor')}}">Nouvelle Couleur</a></li>									
+                                                        <li><a href="{{path('app_admin_size_addsize')}}">Nouvelle taille</a></li>									
+                                                        <li><a href="{{path('app_admin_country_addcountry')}}">Nouveau Pays</a></li>									
+                                                        <li><a href="{{path('app_admin_city_addcity')}}">Nouvelle Ville</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">Commandes<i class="ti-angle-down"></i></a>
+                                                    <ul class="dropdown">
+                                                        <li><a href="{{path('app_orders_index')}}">Toutes les commandes</a></li>
+                                                        <li><a href="{{path('app_order_delivered_delivered')}}">Commande livrée</a></li>
+                                                        <li><a href="{{path('app_order_delivered_nodelivered')}}">Commande non livrée</a></li>												
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">Clients<i class="ti-angle-down"></i></a>
+                                                    <ul class="dropdown">
+                                                        <li><a href="{{path('app_admin_client_index')}}">Tous les Clients</a></li>
+                                                        <li><a href="{{path('app_admin_client_useractif')}}">Clients Actifs</a></li>
+                                                        <li><a href="{{path('app_order_delivered_nodelivered')}}">Clients non Actifs</a></li>												
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">Promotions<i class="ti-angle-down"></i></a>
+                                                    <ul class="dropdown">
+                                                        <li><a href="{{path('app_admin_promotion_index')}}">Promouvoir un produit</a></li>
+                                                    </ul>
+                                                </li>									
+                                            </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                            <!--/ End Main Menu -->	
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ End Header Inner -->
+</header>
+<div class="shopping-cart section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Shopping Summery -->
+                {% if orders == null %}
+                <div class="col-md-12 mx-auto mt-2">
+                    <div class="alert alert-info alert dimissible fade show">
+                        <p>Aucune commande de dispponible !!!</p>
+                    </div>
+                </div>
+                {% else %}
+                <table class="table shopping-summery">
+                    <thead>
+                        <tr class="main-hading">
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th class="text-center">E-mail</th>
+                            <th class="text-center">Téléohone</th>
+                            <th class="text-center">Pays</th> 
+                            <th class="text-center">Ville</th>
+                            <th class="text-center">Statut</th>
+                            <th class="text-center">Action</th> 
+                        </tr>
+                    </thead>
+                    <tbody>                        
+                            {% for item in orders %}
+                                 <tr>
+                                  <td class="product-des" data-title="Description">
+                                      <p class="product-name"><a href="#">{{item.name}}</a></p>
+                                  </td>
+                                  <td class="price" data-title="Price"><span>{{item.firstname}}</span></td>
+                                  <td class="price" data-title="Price"><span>{{item.email}}</span></td>
+                                  <td class="price" data-title="Price"><span>{{item.phonenumber}}</span></td>
+                                  <td class="price" data-title="Price"><span>{{item.country.name}}</span></td>
+                                  <td class="price" data-title="Price"><span>{{item.city.name}}</span></td>
+                                  {% if item.Iscompleted == true %}
+                                  <td class="price" data-title="Price"><span style="color: green;"><h6>Livré</h6></span></td>
+                                  {% else %}
+                                  <td class="price" data-title="Price"><span style="color: red;"><h6>Non livré</h6></span></td>
+                                  {% endif %}
+                                  <td class="price" data-title="Price">
+                                    <a href="{{path('app_orders_show', {id: item.id})}}"><div class="btn btn-primary"> Détails</div></a>
+                                  </td>
+                             </tr>
+
+                             {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    {% endif %}
+
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <!-- Footer Top -->
+    <div class="footer-top section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer about">
+                        <div class="logo">
+                            <a href="index.html"><img width="150px" height="150px" src="{{asset('asset/images/malincop.png')}}" alt="#"></a>
+                        </div>
+                        <p class="call">Pour toutes vos questions appelez-nous :<span><a href="tel:74427249">+236 74427249</a></span></p>
+                    </div>
+                    <!-- End Single Widget -->
+                </div>
+                <div class="col-lg-2 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer links">
+                        <h4>Information</h4>
+                        <ul>
+                            <li><a href="#">A propos de nous</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Termes et conditions</a></li>
+                            <li><a href="#">Contactez nous</a></li>
+                            <li><a href="#">Aide</a></li>
+                        </ul>
+                    </div>
+                    <!-- End Single Widget -->
+                </div>
+                <div class="col-lg-2 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer links">
+                        <h4>Service à la clientelle</h4>
+                        <ul>
+                            <li><a href="#">Méthode de paiement</a></li>
+                            <li><a href="#">Rembourssement</a></li>
+                            <li><a href="#">Retour</a></li>
+                            <li><a href="#">Expédition</a></li>
+                        </ul>
+                    </div>
+                    <!-- End Single Widget -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer social">
+                        <h4>Entrer en contact</h4>
+                        <!-- Single Widget -->
+                        <div class="contact">
+                            <ul>
+                                <li>Républic centrafricaine.</li>
+                                <li>Bangui.</li>
+                                <li>mokosseakowoe@gmail.com</li>
+                                <li>+236 74427249</li>
+                            </ul>
+                        </div>
+                        <!-- End Single Widget -->
+                        <ul>
+                            <li><a href="#"><i class="ti-facebook"></i></a></li>
+                            <li><a href="#"><i class="ti-twitter"></i></a></li>
+                            <li><a href="#"><i class="ti-flickr"></i></a></li>
+                            <li><a href="#"><i class="ti-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- End Single Widget -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer Top -->
+    <div class="copyright">
+        <div class="container">
+            <div class="inner">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <div class="left">
+                            <p>Copyright © 2025 <a href="http://www.wpthemesgrid.com" target="_blank">Malin_Shop</a>  -  Tout droit réservé.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="right">
+                            <img src="{{asset('asset/images/payments.png')}}" alt="#">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}

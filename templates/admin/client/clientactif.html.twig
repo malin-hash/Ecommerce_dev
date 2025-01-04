@@ -1,0 +1,79 @@
+{% extends 'base2.html.twig' %}
+{% block body %}
+<div class="shopping-cart section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Total Amount -->
+                <div class="total-amount">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-7 col-12">
+                            <div class="left">
+                                <div class="title">
+                                    <h4 style="color: orange;" ><a href="{{path('app_admin_index')}}"><i class="fas fa-arrow-left"></i> Acceuil</a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/ End Total Amount -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+            <br>
+            {% include "_partials/_flashmessage.html.twig" %}
+            <div class="row">
+                <div class="col-12">
+                    <!-- Shopping Summery -->
+                    <table class="table shopping-summery">
+                        <thead>
+                            <tr class="main-hading">
+                                <th>Nom</th>
+                                <th>Prénom(s)</th>
+                                <th>Pays</th>
+                                <th>Ville</th>
+                                <th>E-mail</th>
+                                <th>Adresse</th>
+                                <th>Téléphone</th>
+                                <th class="text-center"><i class="ti-trash remove-icon"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for client in users %}
+                                <tr>
+                                    <td class="product-des" data-title="Description">
+                                        <p class="product-name"><a href="#">{{client.name}}</a></p>
+                                    </td> 
+                                    <td class="product-des" data-title="Description">
+                                        <p class="product-name"><a href="#">{{client.firstname}}</a></p>
+                                    </td>
+                                    <td class="product-des" data-title="Description">
+                                        <p class="product-name"><a href="#">{{client.country.name}}</a></p>
+                                    </td>
+                                    <td class="product-des" data-title="Description">
+                                        <p class="product-name"><a href="#">{{client.city.name}}</a></p>
+                                    </td>
+                                    <td class="product-des" data-title="Description">
+                                        <p class="product-name"><a href="#">{{client.email}}</a></p>
+                                    </td>
+                                    <td class="product-des" data-title="Description">
+                                        <p class="product-name"><a href="#">{{client.address}}</a></p>
+                                    </td>
+                                    <td class="product-des" data-title="Description">
+                                        <p class="product-name"><a href="#">{{client.phonenumber}}</a></p>
+                                    </td>
+                                    <td class="action" data-title="Remove"><a onclick=" return confirm('Voulez-vous Vraiment supprimer ce Client ?')" style="color: red;" href="{{path('app_admin_client_deleteclient', { id: client.id })}}"><i class="ti-trash remove-icon"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!--/ End Shopping Summery -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ End Shopping Cart -->
+{% endblock %}

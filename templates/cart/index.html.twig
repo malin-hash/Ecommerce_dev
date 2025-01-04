@@ -1,0 +1,303 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+<header class="header shop">
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-12 col-12">
+                    <!-- Top Left -->
+                    <div class="top-left">
+                        <ul class="list-main">
+                            <li><i class="ti-headphone-alt"></i> (+236) 74427249</li>
+                            <li><i class="ti-email"></i> mokosseakowo@gmail.com</li>
+                        </ul>
+                    </div>
+                    <!--/ End Top Left -->
+                </div>
+                <div class="col-lg-7 col-md-12 col-12">
+                    <!-- Top Right -->
+                    <div class="right-content">
+                        <ul class="list-main">   
+                            {% if (app.user) %}
+                            <li><a href="{{path('app_logout')}}"><i class="ti-power-off"></i> Se déconnecter</a></li>
+                            {% else %}
+                            <li><a href="{{path('app_login')}}"><i class="ti-power-off"></i> Connectez-vous</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <!-- End Top Right -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Topbar -->
+    <div class="middle-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-12">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="index.html"><img src="{{asset('asset/images/logo.png')}}" alt="logo"></a>
+                    </div>
+                    <!--/ End Logo -->
+                    <!-- Search Form -->
+                    <div class="search-top">
+                        <div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
+                        <!-- Search Form -->
+                        <div class="search-top">
+                            <form class="search-form">
+                                <input type="text" placeholder="Rechercher ici..." name="search">
+                                <button value="search" type="submit"><i class="ti-search"></i></button>
+                            </form>
+                        </div>
+                        <!--/ End Search Form -->
+                    </div>
+                    <!--/ End Search Form -->
+                    <div class="mobile-nav"></div>
+                </div>
+                <div class="col-lg-8 col-md-7 col-12">
+                    <div class="search-bar-top">
+                        <div class="search-bar">
+                           
+                            <form>
+                                <input name="search" placeholder="Rechercher les produits ici....." type="search">
+                                <button class="btnn"><i class="ti-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-12">
+                    <div class="right-bar">
+                        <!-- Search Form -->
+                        <div class="sinlge-bar">
+                            <a href="#" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="sinlge-bar">
+                            <a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+                        </div>
+                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header Inner -->
+    <div class="header-inner">
+        <div class="container">
+            <div class="cat-nav-head">
+                <div class="row">
+                    
+                    <div class="col-lg-9 col-12">
+                        <div class="menu-area">
+                            <!-- Main Menu -->
+                            <nav class="navbar navbar-expand-lg">
+                                <div class="navbar-collapse">	
+                                    <div class="nav-inner">	
+                                        <ul class="nav main-menu menu navbar-nav">
+                                                <li class="active"><a href="#">Acceuil</a></li>
+                                                <li><a href="#">Boutique</a></li>												
+                                                {# <li><a href="#">Boutique<i class="ti-angle-down"></i></a>
+                                                    <ul class="dropdown">
+                                                        <ul class="nav main-menu menu navbar-nav">
+                                                            <li class="active"><a href="#">Acceuil</a></li>
+                                                            <li><a href="#">Produit</a></li>												
+                                                            <li><a href="#">Boutique<i class="ti-angle-down"></i></a>
+                                                                <ul class="dropdown">
+                                                                    <li><a href="checkout.html">Acheter</a></li>
+                                                                     <li><a href="#">Boutique<i class="ti-angle-down"></i></a>
+                                                                        <ul class="dropdown">
+                                                                            <li><a href="checkout.html">Acheter</a></li>
+                                                                        </ul>
+                                                                     </li>
+                                                                </ul>
+                                                            </li>									
+                                                            {% if  (app.getUser) %}
+                                                             <li><a href="{{path('app_home_contact')}}">Contacter Nous</a></li>
+                                                                {% if  (app.user.roles) != ['ROLE_USER'] %}
+                                                                     <li><a href="{{path('app_admin_index')}}">Administration</a></li>
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        </ul>
+                                                    </ul>
+                                                </li>									 #}
+                                                {% if  (app.getUser) %}
+                                                    {% if  (app.user.roles) != ['ROLE_USER'] %}
+                                                         <li><a href="{{path('app_admin_index')}}">Administration</a></li>
+                                                    {% else %}
+                                                          <li><a href="{{path('app_user_message_index')}}">Contacter Nous</a></li>
+                                                    {% endif %}
+
+                                                {% endif %}
+                                            </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                            <!--/ End Main Menu -->	
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ End Header Inner -->
+</header>
+<div class="shopping-cart section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Shopping Summery -->
+                {% if data == [] %}
+                <div class="col-md-12 mx-auto mt-2">
+                    <div class="alert alert-info alert dimissible fade show">
+                        <p>Votre panier est vide !!!</p>
+                    </div>
+                </div>
+                {% else %}
+                <table class="table shopping-summery">
+                    <thead>
+                        <tr class="main-hading">
+                            <th>Image</th>
+                            <th>Nom</th>
+                            <th class="text-center">Prix</th>
+                            <th class="text-center">Quantité</th>
+                            <th class="text-center">Total</th> 
+                            <th class="text-center"><i class="ti-trash remove-icon"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>                        
+                            {% for item in data %}
+                                 <tr>
+                                  <td class="image" data-title="No"><a href="{{path('app_home_show', { id: item.product.id })}}"><img src="{{asset('images/products/') ~item.product.imagename}}" alt="#"></a></td>
+                                  <td class="product-des" data-title="Description">
+                                      <p class="product-name"><a href="#">{{item.product.name}}</a></p>
+                                  </td>
+                                  <td class="price" data-title="Price"><span>{{item.product.price}} fcfa</span></td>
+                                  <td class="qty" data-title="Qty"><!-- Input Order -->
+                                      <div class="input-group">
+                                          <div class="button minus">
+                                              <button type="button" class="btn btn-danger btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                                                  <a href="{{path('app_cart_remove', {id: item.product.id})}}"><i style="color: rgb(241, 10, 10);" class="ti-minus"></i></a>
+                                              </button>
+                                          </div>
+                                          <input type="text" name="quant[1]" class="input-number"  data-min="1" data-max="100" value="{{item.quantity}}">
+                                          <div class="button plus">
+                                              <button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
+                                                 <a href="{{path('app_cart_addplus', { id: item.product.id})}}"><i style="color: rgb(6, 145, 6);" class="ti-plus"></i></a>
+                                              </button>
+                                          </div>
+                                      </div>
+                                      <!--/ End Input Order -->
+                                  </td>
+                                  <td class="total-amount" data-title="Total"><span>{{item.product.price * item.quantity}} fcfa</span></td>
+                                  <td class="action" data-title="Remove"><a href="{{path('app_cart_delete', { id: item.product.id})}}"><i class="ti-trash remove-icon"></i></a></td>
+                             </tr>
+
+                             {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <!-- Total Amount -->
+                <div class="total-amount">
+                        <div class="col-lg-4 col-md-7 col-12" style="position: relative;left: 300px;">
+                            <div class="right">
+                                <ul>
+                                    <li>Total<span>{{total}} fcfa</span></li>
+                                    <li>(+)Expédition)<span> 00 fcfa</span></li>
+                                    {% if total > 0 %}
+                                        <li class="last">Net à payer<span>{{total}} fcfa</span></li>
+                                    {% else %}
+                                       <li class="last">Net à payer<span>00 fcfa</span></li>
+                                    {% endif %}                                    
+                                </ul>
+                                <div class="button5">
+                                    <a href="{{path('app_orders_add')}}" class="btn">Placez la commande</a>
+                                    {# <a href="{{path('app_cart_sup', { id: item.product.id})}}" class="btn">Videz le panier</a> #}
+
+                                </div>
+                            {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/ End Total Amount -->
+            </div>
+        </div>
+</div>
+<!--/ End Shopping Cart -->
+        
+<!-- Start Shop Services Area  -->
+<section class="shop-services section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-12">
+                <!-- Start Single Service -->
+                <div class="single-service">
+                    <i class="ti-rocket"></i>
+                    <h4>Free shiping</h4>
+                    <p>Orders over $100</p>
+                </div>
+                <!-- End Single Service -->
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <!-- Start Single Service -->
+                <div class="single-service">
+                    <i class="ti-reload"></i>
+                    <h4>Free Return</h4>
+                    <p>Within 30 days returns</p>
+                </div>
+                <!-- End Single Service -->
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <!-- Start Single Service -->
+                <div class="single-service">
+                    <i class="ti-lock"></i>
+                    <h4>Sucure Payment</h4>
+                    <p>100% secure payment</p>
+                </div>
+                <!-- End Single Service -->
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <!-- Start Single Service -->
+                <div class="single-service">
+                    <i class="ti-tag"></i>
+                    <h4>Best Peice</h4>
+                    <p>Guaranteed price</p>
+                </div>
+                <!-- End Single Service -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Shop Newsletter -->
+
+<!-- Start Shop Newsletter  -->
+<section class="shop-newsletter section">
+    <div class="container">
+        <div class="inner-top">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-12">
+                    <!-- Start Newsletter Inner -->
+                    <div class="inner">
+                        <h4>Newsletter</h4>
+                        <p> Subscribe to our newsletter and get <span>10%</span> off your first purchase</p>
+                        <form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
+                            <input name="EMAIL" placeholder="Your email address" required="" type="email">
+                            <button class="btn">Subscribe</button>
+                        </form>
+                    </div>
+                    <!-- End Newsletter Inner -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base2.html.twig' %}
+{% block body %}
+    <section id="contact-us" class="contact-us section">
+        <div class="container">
+                <div class="contact-head">
+                    <div class="row">
+                        <div class="col-lg-8 col-12">
+                            <div class="form-main">
+                                <div class="title">
+                                    <h4><a href="{{path('app_admin_index')}}"><i class="fas fa-arrow-left"></i> Acceuil</a></h4>
+                                    <h3>Modifier une Ville</h3>
+                                </div>
+                                {{ form_start(form) }}
+                                    <div class="row">
+                                        <div class="col-lg-6 col-12">
+                                            <div class="form-group">
+                                                {{ form_row(form.name, {'attr':{'class': 'form-control'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group button">
+                                                <button type="submit" class="btn ">Modifier</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 {{ form_end(form) }}
+                                 <div class="col-12">
+                                    <div class="form-group button">
+                                        <a  href="{{path('app_admin_city_index')}}"><button class="btn">Liste des Villes</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+    </section>
+{% endblock %}

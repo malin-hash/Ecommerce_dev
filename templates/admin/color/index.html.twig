@@ -1,0 +1,56 @@
+{% extends 'base2.html.twig'%}
+{% block body %}
+<!-- Shopping Cart -->
+<div class="shopping-cart section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Total Amount -->
+                <div class="total-amount">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-7 col-12">
+                            <div class="left">
+                                <div class="title">
+                                    <h4 style="color: orange;" ><a href="{{path('app_admin_index')}}"><i class="fas fa-arrow-left"></i> Acceuil</a></h4>
+                                </div>
+                                <div class="button5">
+                                    <a style="color: white;" href="{{path('app_admin_color_addcolor')}}" class="btn">Ajouter une Couleur</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/ End Total Amount -->
+            </div>
+        </div><br>
+        {% include "_partials/_flashmessage.html.twig" %}
+        <div class="row">
+            <div class="col-12">
+                <!-- Shopping Summery -->
+                <table class="table shopping-summery">
+                    <thead>
+                        <tr class="main-hading">
+                            <th>Couleur</th> 
+                            <th class="text-center"><i class="ti-trash remove-icon"></i></th>
+                            <th><i class="fas fa-edit"></i> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for color in colors %}
+                            <tr>
+                                <td class="product-des" data-title="Description">
+                                    <p class="product-name"><a href="#">{{color.name}}</a></p>
+                                </td>
+                                <td class="action" data-title="Remove"><a onclick=" return confirm('Voulez-vous Vraiment supprimer cette couleur ?')" style="color: red;" href="{{path('app_admin_color_deletecolor', { id: color.id })}}"><i class="ti-trash remove-icon"></i></a></td>
+                                <td><a  style="color: blue;" href="{{path('app_admin_color_updatecolor', { id: color.id })}}"><i class="fas fa-pencil-alt"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!--/ End Shopping Summery -->
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ End Shopping Cart --> 
+{% endblock %}

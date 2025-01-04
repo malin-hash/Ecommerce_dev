@@ -1,0 +1,117 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block body %}
+
+<div class="shopping-cart section">
+        <div class="container">
+            <h4 style="text-decoration: underline;">INFORMATION DE LA COMMANDE</h4>
+        {% for item in orders %} 
+            {% if item.iscompleted == true %}
+            <div style="color: green;"><span style="color: black;">Etat de la commande : </span> Commande livrée le {{item.datedeliver|date('d M Y à H:i')}}</div>
+            {% else %}  
+            <div style="color: red;"><span style="color: black;">Etat de la commande : </span> Commande non livrée</div>
+            {% endif %}
+            <strong><span>Commande n° : {{item.id}}</span></strong>         
+        {% endfor %}
+        <h5 style="text-decoration: underline;" >Information du Client</h5><br>
+        <div class="row">
+            <div class="col-12">
+                <!-- Shopping Summery -->
+                <table class="table shopping-summery">
+                    <thead>
+                        <tr class="main-hading">
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th class="text-center">E-mail</th>
+                            <th class="text-center">Adresse</th>
+                            <th class="text-center">Téléphone</th> 
+                            <th class="text-center">Pays</th> 
+                            <th class="text-center">Ville</th> 
+                            <th class="text-center">Code Postal</th> 
+                            {# <th class="text-center">Date Livraison</th>  #}
+                        </tr>
+                    </thead>
+                    <tbody>                        
+                            {% for item in orders %}
+                                 <tr>
+                                  <td class="price" data-title="Price"><span>{{item.name}}</span></td>
+                                  <td class="product-des" data-title="Description">
+                                      <p class="product-name"><a href="#">{{item.firstname}}</a></p>
+                                  </td>
+                                  <td class="price" data-title="Price"><span>{{item.email}}</span></td>
+                                  <td class="price" data-title="Price"><span>{{item.address}}</span></td>
+                                  <td class="price" data-title="Price"><span>{{item.phonenumber}}</span></td>
+                                  <td class="price" data-title="Price"><span>{{item.country.name}}</span></td>
+                                  <td class="price" data-title="Price"><span>{{item.city.name}}</span></td>
+                                  <td class="price" data-title="Price"><span>{{item.postalcode}}</span></td>
+                                  {# {% if item.iscomple ted == null %}
+                                  <td class="price" data-title="Price"><span>{{item.datedeliver}}</span></td>
+                                  {% else %}
+                                  <span>Non livrée</span>
+                                  {% endif %} #}
+                                  
+                             </tr>
+                             {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <div class="container"><br>
+        <h5 style="text-decoration: underline;">Détails de la commande</h5><br>
+        <div class="row">
+            <div class="col-12">
+                <!-- Shopping Summery -->
+                <table class="table shopping-summery">
+                    <thead>
+                        <tr class="main-hading">
+                            <th>Image</th>
+                            <th>Nom</th>
+                            <th class="text-center">Prix</th>
+                            <th class="text-center">Quantité</th>
+                            <th class="text-center">Total</th> 
+                        </tr>
+                    </thead>
+                    <tbody>                        
+                            {% for item in order %}
+                                 <tr>
+                                  <td class="image" data-title="No"><a href="{{path('app_home_show', { id: item.product.id })}}"><img src="{{asset('images/products/') ~item.product.imagename}}" alt="#"></a></td>
+                                  <td class="product-des" data-title="Description">
+                                      <p class="product-name"><a href="#">{{item.product.name}}</a></p>
+                                  </td>
+                                  <td class="price" data-title="Price"><span>{{item.price}} fcfa</span></td>
+                                  <td class="price" data-title="Price"><span>{{item.quantity}}</span></td>
+                                  <td class="total-amount" data-title="Total"><span>{{item.price * item.quantity}} fcfa</span></td>
+                             </tr>
+
+                             {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <!-- Total Amount -->
+                <div class="total-amount">
+                        <div class="col-lg-4 col-md-7 col-12" style="position: relative;left: 300px;">
+                            <div class="right">
+                                <div class="button5">
+                                    {% if orderid.iscompleted == null %}
+                                         {% if orderid != null %}
+                                         <a href="{{path('app_orders_by', {id: orderid.id})}}" class="btn">Marquez comme Livrer</a>
+                                         {% endif %}
+                                    {% endif %}
+                                    <a href="{{path('app_bill', {id: orderid.id})}}" class="btn">Téléchargé la facture </a>
+                                    <a href="{{path('app_view', {id: orderid.id})}}" class="btn">Voir la facture</a>
+                                </div><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/ End Total Amount -->
+            </div>
+        </div>
+</div>
+
+{% endblock %}

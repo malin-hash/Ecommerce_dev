@@ -1,0 +1,58 @@
+{% extends 'base2.html.twig' %}
+{% block body %}
+<div class="shopping-cart section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Total Amount -->
+                <div class="total-amount">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-7 col-12">
+                            <div class="left">
+                                <div class="title">
+                                    <h4 style="color: orange;" ><a href="{{path('app_admin_index')}}"><i class="fas fa-arrow-left"></i> Acceuil</a></h4>
+                                </div>
+                                <div class="button5">
+                                    <a style="color: white;" href="{{path('app_admin_category_addcategory')}}" class="btn">Ajouter une Catégorie</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/ End Total Amount -->
+            </div>
+        </div>
+    </div>
+</div>
+        <br>
+        {% include "_partials/_flashmessage.html.twig" %}
+        <div class="row">
+            <div class="col-12">
+                <!-- Shopping Summery -->
+                <table class="table shopping-summery">
+                    <thead>
+                        <tr class="main-hading">
+                            <th>Catégorie</th>
+                            <th class="text-center"><i class="ti-trash remove-icon"></i></th>
+                            <th><i class="fas fa-edit"></i> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in categories %}
+                            <tr>
+                                <td class="product-des" data-title="Description">
+                                    <p class="product-name"><a href="#">{{category.name}}</a></p>
+                                </td>
+                                <td class="action" data-title="Remove"><a onclick=" return confirm('Voulez-vous Vraiment supprimer cette catégorie ?')" style="color: red;" href="{{path('app_admin_category_deletecategory', { id: category.id })}}"><i class="ti-trash remove-icon"></i></a></td>
+                                <td><a  style="color: blue;" href="{{path('app_admin_category_updatecategory', { id: category.id })}}"><i class="fas fa-pencil-alt"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!--/ End Shopping Summery -->
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ End Shopping Cart -->
+{% endblock %}

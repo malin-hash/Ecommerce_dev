@@ -1,0 +1,792 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<header class="header shop">
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-12 col-12">
+                    <!-- Top Left -->
+                    <div class="top-left">
+                        <ul class="list-main">
+                            <li><i class="ti-headphone-alt"></i> (+236) 74427249</li>
+                            <li><i class="ti-email"></i> mokosseakowo@gmail.com</li>
+                        </ul>
+                    </div>
+                    <!--/ End Top Left -->
+                </div>
+                <div class="col-lg-7 col-md-12 col-12">
+                    <!-- Top Right -->
+                    <div class="right-content">
+                        <ul class="list-main">   
+                            {% if (app.user) %}
+                            <li><a href="{{path('app_logout')}}"><i class="ti-power-off"></i> Se déconnecter</a></li>
+                            {% else %}
+                            <li><a href="{{path('app_login')}}"><i class="ti-power-off"></i> Connectez-vous</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <!-- End Top Right -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Topbar -->
+    <div class="middle-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-12">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="index.html"><img src="{{asset('asset/images/logo.png')}}" alt="logo"></a>
+                    </div>
+                    <!--/ End Logo -->
+                    <!-- Search Form -->
+                    <div class="search-top">
+                        <div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
+                        <!-- Search Form -->
+                        <div class="search-top">
+                            <form class="search-form">
+                                <input type="text" placeholder="Rechercher ici..." name="search">
+                                <button value="search" type="submit"><i class="ti-search"></i></button>
+                            </form>
+                        </div>
+                        <!--/ End Search Form -->
+                    </div>
+                    <!--/ End Search Form -->
+                    <div class="mobile-nav"></div>
+                </div>
+                <div class="col-lg-8 col-md-7 col-12">
+                    <div class="search-bar-top">
+                        <div class="search-bar">
+                           
+                            <form>
+                                <input name="search" placeholder="Rechercher les produits ici....." type="search">
+                                <button class="btnn"><i class="ti-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-12">
+                    <div class="right-bar">
+                        <!-- Search Form -->
+                        <div class="sinlge-bar">
+                            <a href="#" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="sinlge-bar">
+                            <a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="sinlge-bar shopping">
+                                <a href="{{path('app_cart_call')}}" class="single-icon"><i class="ti-bag"></i><span class="total-count">{{quantities}}</span></a>
+                                <div class="shopping-item">
+                                    <div class="dropdown-cart-header">
+                                        {% if quantities > 1 %}
+                                        <span>{{quantities}} éléments</span>
+                                        {% else %}                                        
+                                        <span>{{quantities}} élément</span>
+                                        {% endif %}                                        
+                                        <a href="{{path('app_cart_call')}}">Voir le panier</a>
+                                    </div>
+                                    <ul class="shopping-list">
+                                        {% for item in data %}
+                                        <li>
+                                            <a href="{{path('app_cart_del', {id: item.product.id})}}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
+                                            <a class="cart-img" href="#"><img src="{{asset('images/products/'~item.product.imagename)}}" alt="#"></a>
+                                            <h4><a href="#">{{item.product.name}}</a></h4>
+                                            <p class="quantity">{{item.quantity}} x - <span class="amount">{{item.product.price}}</span></p>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% if total == 0 %}
+                                    <div class="col-md-12 mx-auto mt-2">
+                                        <div class="alert alert-info alert dimissible fade show">
+                                            <span>Votre panier est vide</span>
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    <div class="bottom">
+                                        <div class="total">
+                                            <span>Total</span>
+                                            <span class="total-amount">{{total}} fcfa</span>
+                                        </div>
+                                        <div class="total">
+                                            <span>(+) Expédition</span>
+                                            <span class="total-amount">10000 fcfa</span>
+                                        </div>
+                                        <div class="total">
+                                            <span>Net à payer</span>
+                                            <span class="total-amount">{{total + 10000}} fcfa</span>
+                                        </div>
+                                        <a href="{{path('app_orders_add')}}" class="btn animate">Placez la commande</a>
+                                    </div>
+                                    {% endif %}
+                                    
+                                   
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header Inner -->
+    <div class="header-inner">
+        <div class="container">
+            <div class="cat-nav-head">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="all-category">
+                            <h3 class="cat-heading"><i class="fa fa-bars" aria-hidden="true"></i>Filtres</h3>
+                                <ul class="main-category">
+                                {% for allcategory in allcategories %}
+                                    <li><a href="#">Les accesoires pour {{allcategory.name}}<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                        <ul class="sub-category">
+                                            {% for subcategory in allcategory.subCategories %}
+                                                <li><a href="#">{{subcategory.name|slice(0,7)}}</a></li>
+                                             {% endfor %}
+                                            
+                                        </ul>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-12">
+                        <div class="menu-area">
+                            <!-- Main Menu -->
+                            <nav class="navbar navbar-expand-lg">
+                                <div class="navbar-collapse">	
+                                    <div class="nav-inner">	
+                                        <ul class="nav main-menu menu navbar-nav">
+                                                <li class="active"><a href="#">Acceuil</a></li>
+                                                <li><a href="#">Boutique</a></li>												
+                                                {# <li><a href="#">Boutique<i class="ti-angle-down"></i></a>
+                                                    <ul class="dropdown">
+                                                        <ul class="nav main-menu menu navbar-nav">
+                                                            <li class="active"><a href="#">Acceuil</a></li>
+                                                            <li><a href="#">Produit</a></li>												
+                                                            <li><a href="#">Boutique<i class="ti-angle-down"></i></a>
+                                                                <ul class="dropdown">
+                                                                    <li><a href="checkout.html">Acheter</a></li>
+                                                                     <li><a href="#">Boutique<i class="ti-angle-down"></i></a>
+                                                                        <ul class="dropdown">
+                                                                            <li><a href="checkout.html">Acheter</a></li>
+                                                                        </ul>
+                                                                     </li>
+                                                                </ul>
+                                                            </li>									
+                                                            {% if  (app.getUser) %}
+                                                             <li><a href="{{path('app_home_contact')}}">Contacter Nous</a></li>
+                                                                {% if  (app.user.roles) != ['ROLE_USER'] %}
+                                                                     <li><a href="{{path('app_admin_index')}}">Administration</a></li>
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        </ul>
+                                                    </ul>
+                                                </li>									 #}
+                                                {% if  (app.getUser) %}
+                                                    {% if  (app.user.roles) != ['ROLE_USER'] %}
+                                                         <li><a href="{{path('app_admin_index')}}">Administration</a></li>
+                                                    {% else %}
+                                                          <li><a href="{{path('app_user_message_index')}}">Contacter Nous</a></li>
+                                                    {% endif %}
+
+                                                {% endif %}
+                                            </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                            <!--/ End Main Menu -->	
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ End Header Inner -->
+</header>
+<section class="hero-slider " >
+    <!-- Single Slider -->
+    <div class="single-slider">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-lg-9  offset-lg-3 col-12">
+                    <div class="text-inner">
+                        <div class="row">
+                            <div class="col-lg-7 col-12">
+                                <div class="hero-text" style="margin-top: 50px;">
+                                    <h1><span>Jusqu'à 50% de réduction Sur </span>Nos articles</h1>
+                                    <p><h3>Malin Shop</h3> une boutique qui vous offre  <br> que des produits hotes games de bonnes marques <br> Les produits de marques et premiers choix</p>
+                                    <div class="button">
+                                        <a href="#" class="btn">Achetez Maintenant !</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ End Single Slider -->
+</section>
+<section class="small-banner section" >
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Single Banner  -->
+            {% for product in products %}
+            <div class="col-lg-4  col-md-6 col-12">
+                <div class="single-banner">
+                    <img src="{{asset('images/products/')~product.imagename}}" alt="#">
+                    <div class="content">
+                        <p>Nouvelle Collection</p>
+                        <h3>{{product.name}} <br> {{product.description}}</h3>
+                    </div>
+                </div> 
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- End Small Banner -->
+
+<!-- Start Product Area -->
+<div class="product-area section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2>Article de tendance</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-info">
+                        <div class="nav-main">
+                            <!-- Tab Nav -->
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#man" role="tab">Homme</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#women" role="tab">Femme</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#kids" role="tab">Enfant</a></li>
+                            </ul>
+                            <!--/ End Tab Nav -->
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="man" role="tabpanel">
+                                <div class="tab-single">
+                                    <div class="row">
+                                        {% for productman in productmans %}
+                                            <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <a href="{{path('app_home_show', { id: productman.id })}}">
+                                                        <img class="default-img" src="{{asset('images/products/')~productman.imagename}}" alt="#">
+                                                        <img class="hover-img" src="{{asset('images/products/')~productman.imagename}}" alt="#">
+                                                    </a>
+                                                    <div class="button-head">
+                                                        <div class="product-action">
+                                                            <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
+                                                            <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Liker</span></a>
+                                                            <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Ajouter au comparateur</span></a>
+                                                        </div>
+                                                        <div class="product-action-2">
+                                                            <a title="Add to cart" href="#">Ajouter au panier</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content">
+                                                    <h3><a href="{{path('app_home_show', { id: productman.id })}}">{{productman.name}}</a></h3>
+                                                    <div class="product-price">
+                                                        <span>{{productman.price}} Fcfa</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/ End Single Tab -->
+                            <!-- Start Single Tab -->
+                            <div class="tab-pane fade" id="women" role="tabpanel">
+                                <div class="tab-single">
+                                    <div class="row">
+                                        {% for productwoman in productwomans %}
+                                            <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <a href="{{path('app_home_show', { id: productwoman.id })}}">
+                                                        <img class="default-img" src="{{asset('images/products/')~productwoman.imagename}}" alt="#">
+                                                        <img class="hover-img" src="{{asset('images/products/')~productwoman.imagename}}" alt="#">
+                                                    </a>
+                                                    <div class="button-head">
+                                                        <div class="product-action">
+                                                            <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
+                                                            <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                                            <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
+                                                        </div>
+                                                        <div class="product-action-2">
+                                                            <a title="Add to cart" href="#">Ajouter au panier</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content">
+                                                    <h3><a href="{{path('app_home_show', { id: productwoman.id })}}">{{productwoman.name}}</a></h3>
+                                                    <div class="product-price">
+                                                        <span>{{productwoman.price}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/ End Single Tab -->
+                            <!-- Start Single Tab -->
+                            <div class="tab-pane fade" id="kids" role="tabpanel">
+                                <div class="tab-single">
+                                    <div class="row">
+                                        {% for productchild in productchilds %}
+                                            <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <a href="{{path('app_home_show', { id: productchild.id })}}">
+                                                        <img class="default-img" src="{{asset('images/products/')~productchild.imagename}}" alt="#">
+                                                        <img class="hover-img" src="{{asset('images/products/')~productchild.imagename}}" alt="#">
+                                                    </a>
+                                                    <div class="button-head">
+                                                        <div class="product-action">
+                                                            <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
+                                                            <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                                            <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
+                                                        </div>
+                                                        <div class="product-action-2">
+                                                            <a title="Add to cart" href="#">Ajouter au panier</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content">
+                                                    <h3><a href="{{path('app_home_show', { id: productchild.id })}}">{{productchild.name}}</a></h3>
+                                                    <div class="product-price">
+                                                        <span>{{productchild.price}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Start Single Tab -->
+                            
+                            <!--/ End Single Tab -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<!-- End Product Area -->
+<!-- Start Most Popular -->
+<div class="product-area most-popular section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    <h2>Nos Produits</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="owl-carousel popular-slider">
+                    <!-- Start Single Product -->
+                    {% for allproduct in allproducts %}
+                    <div class="single-product">
+                        <div class="product-img">
+                            <a href="{{path('app_home_show', { id: allproduct.id })}}">
+                                <img class="default-img" src="{{asset('images/products/')~allproduct.imagename}}" alt="#">
+                                <img class="hover-img" src="{{asset('images/products/')~allproduct.imagename}}" alt="#">
+                                <span class="out-of-stock">Hot</span>
+                            </a>
+                            <div class="button-head">
+                                <div class="product-action">
+                                    <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="{{path('app_cart_add', { id: allproduct.id })}}"><i class="ti-bag"></i><span>Ajouter au panier</span></a>
+                                    <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Liker</span></a>
+                                </div>
+                                <div class="product-action-2">
+                                    <a title="Add to cart" href="{{path('app_cart_add', { id: allproduct.id })}}">Ajouter au panier</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3><a href="{{path('app_home_show', { id: allproduct.id })}}">{{allproduct.name}}</a></h3>
+                            <h6 style="color: blue;"><a href="product-details.html">{{allproduct.description}}</a></h6>
+                            <div class="product-price">
+                                <span>{{allproduct.price}} Fcfa </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Product -->
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Most Popular Area -->
+<!-- Start Most Popular -->
+{% if promotions%}
+<div class="product-area most-popular section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    <h2>Nos Promotions</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="owl-carousel popular-slider">
+                    <!-- Start Single Product -->                    
+                    {% for promotion in promotions %}
+                    <div class="single-product">
+                        <div class="product-img">
+                            <a href="{{path('app_home_show', { id: promotion.id })}}">
+                                <img class="default-img" src="{{asset('images/products/')~promotion.imagename}}" alt="#">
+                                <img class="hover-img" src="{{asset('images/products/')~promotion.imagename}}" alt="#">
+                                <span class="out-of-stock">Promotion</span>
+                            </a>
+                            <div class="button-head">
+                                <div class="product-action">
+                                    <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class="ti-bag"></i><span>Ajouter au panier</span></a>
+                                    <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Liker</span></a>
+                                </div>
+                                <div class="product-action-2">
+                                    <a title="Add to cart" href="#">Ajouter au panier</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3><a href="{{path('app_home_show', { id: promotion.id })}}">{{promotion.name}}</a></h3>
+                            <h6 style="color: blue;" ><a href="product-details.html">{{promotion.description}}</a></h6>
+                            <div class="product-price">
+                                <span style="color: red;" class="old">{{promotion.price}}</span>
+                                <span>{{promotion.price - (promotion.price * 5 / 100)}} Fcfa </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Product -->
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- End Most Popular Area -->
+
+<section class="section free-version-banner">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8 offset-md-2 col-xs-12">
+                <div class="section-title mb-60">
+                    <span class="text-white wow fadeInDown" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">Malin Shop</span>
+                    <h2 class="text-white wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">La boutique de la tendance<br> Malin Shop vous offre les bons articles</h2>
+                    <p class="text-white wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">Tous les meuilleurs produits sortis du monde entier<br> sont disponibles chez nous.</p>
+
+                    <div class="button">
+                        <a href="https://wpthemesgrid.com/downloads/eshop-ecommerce-html5-template/" target="_blank" rel="nofollow" class="btn wow fadeInUp" data-wow-delay=".8s">Vous êtes à la bonne place</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Start Shop Home List  -->
+<section class="shop-home-list section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="shop-section-title">
+                            <h1>A vendre</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start Single List  -->
+                {% for shop in shops %}
+                <div class="single-list">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="list-image overlay">
+                                <img src="{{asset('images/products/')~shop.imagename}}" alt="#">
+                                <a href="#" class="buy"><i class="fa fa-shopping-bag"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12 no-padding">
+                            <div class="content">
+                                <h4 class="title"><a href="#">{{shop.name}}</a></h4>
+                                <p class="price with-discount">{{shop.price}} Fcfa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- End Single List  -->
+                <!-- End Single List  -->
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="shop-section-title">
+                            <h1>Boutique</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start Single List  -->
+                {% for shopman in shopmans %}
+                <div class="single-list">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="list-image overlay">
+                                <img src="{{asset('images/products/')~shopman.imagename}}" alt="#">
+                                <a href="#" class="buy"><i class="fa fa-shopping-bag"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12 no-padding">
+                            <div class="content">
+                                <h4 class="title"><a href="#">{{shopman.name}}</a></h4>
+                                <p class="price with-discount">{{shopman.price}} Fcfa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- End Single List  -->
+                <!-- End Single List  -->
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="shop-section-title">
+                            <h1>Meilleurs Produits</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start Single List  -->
+                {% for shop in shopchilds %}
+                <div class="single-list">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="list-image overlay">
+                                <img src="{{asset('images/products/')~shop.imagename}}" alt="#">
+                                <a href="#" class="buy"><i class="fa fa-shopping-bag"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12 no-padding">
+                            <div class="content">
+                                <h4 class="title"><a href="#">{{shop.name}}</a></h4>
+                                <p class="price with-discount">{{shop.price}} Fcfa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- End Single List  -->
+                <!-- End Single List  -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Shop Home List  -->
+
+
+<!-- Start Shop Services Area -->
+<section class="shop-services section home">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-12">
+                <!-- Start Single Service -->
+                <div class="single-service">
+                    <i class="ti-rocket"></i>
+                    <h4>Livraison Gratuite</h4>
+                    <p>Commandes sur 1000 fcfa</p>
+                </div>
+                <!-- End Single Service -->
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <!-- Start Single Service -->
+                <div class="single-service">
+                    <i class="ti-reload"></i>
+                    <h4>Retour libre</h4>
+                    <p>30 jours de garantie</p>
+                </div>
+                <!-- End Single Service -->
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <!-- Start Single Service -->
+                <div class="single-service">
+                    <i class="ti-lock"></i>
+                    <h4>Paiement sécurisét</h4>
+                    <p>100% sécurisé</p>
+                </div>
+                <!-- End Single Service -->
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <!-- Start Single Service -->
+                <div class="single-service">
+                    <i class="ti-tag"></i>
+                    <h4>Meilleur Prix</h4>
+                    <p>Prix garantie</p>
+                </div>
+                <!-- End Single Service -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Shop Services Area -->
+
+<!-- Start Shop Newsletter  -->
+<section class="shop-newsletter section">
+    <div class="container">
+        <div class="inner-top">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-12">
+                    <!-- Start Newsletter Inner -->
+                    <div class="inner">
+                        <h4>Newsletter</h4>
+                        <p> Abonnez-vous à notre Newsletter pour abtenir <span>10%</span> de réduction sur votre premier achat</p>
+                        <form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
+                            <input name="EMAIL" placeholder="Votre address E-mail" required="" type="email">
+                            <button class="btn">Abonnez-vous</button>
+                        </form>
+                    </div>
+                    <!-- End Newsletter Inner -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Shop Newsletter -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="ti-close" aria-hidden="true"></span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row no-gutters">
+                        <div class="col-lg-6 offset-lg-3 col-12">
+                            <h4 style="margin-top:100px;font-size:14px; font-weight:500; color:#F7941D; display:block; margin-bottom:5px;">Eshop Free Lite</h4>
+                            <h3 style="font-size:30px;color:#333;">Currently You are using free lite Version of Eshop.<h3>
+                            <p style="display:block; margin-top:20px; color:#888; font-size:14px; font-weight:400;">Please, purchase full version of the template to get all pages, features and commercial license</p>
+                            <div class="button" style="margin-top:30px;">
+                                <a href="https://wpthemesgrid.com/downloads/eshop-ecommerce-html5-template/" target="_blank" class="btn" style="color:#fff;">Buy Now!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<footer class="footer">
+    <!-- Footer Top -->
+    <div class="footer-top section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer about">
+                        <div class="logo">
+                            <a href="index.html"><img width="150px" height="150px" src="{{asset('asset/images/malincop.png')}}" alt="#"></a>
+                        </div>
+                        <p class="call">Pour toutes vos questions appelez-nous :<span><a href="tel:74427249">+236 74427249</a></span></p>
+                    </div>
+                    <!-- End Single Widget -->
+                </div>
+                <div class="col-lg-2 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer links">
+                        <h4>Information</h4>
+                        <ul>
+                            <li><a href="#">A propos de nous</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Termes et conditions</a></li>
+                            <li><a href="#">Contactez nous</a></li>
+                            <li><a href="#">Aide</a></li>
+                        </ul>
+                    </div>
+                    <!-- End Single Widget -->
+                </div>
+                <div class="col-lg-2 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer links">
+                        <h4>Service à la clientelle</h4>
+                        <ul>
+                            <li><a href="#">Méthode de paiement</a></li>
+                            <li><a href="#">Rembourssement</a></li>
+                            <li><a href="#">Retour</a></li>
+                            <li><a href="#">Expédition</a></li>
+                        </ul>
+                    </div>
+                    <!-- End Single Widget -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer social">
+                        <h4>Entrer en contact</h4>
+                        <!-- Single Widget -->
+                        <div class="contact">
+                            <ul>
+                                <li>Républic centrafricaine.</li>
+                                <li>Bangui.</li>
+                                <li>mokosseakowoe@gmail.com</li>
+                                <li>+236 74427249</li>
+                            </ul>
+                        </div>
+                        <!-- End Single Widget -->
+                        <ul>
+                            <li><a href="#"><i class="ti-facebook"></i></a></li>
+                            <li><a href="#"><i class="ti-twitter"></i></a></li>
+                            <li><a href="#"><i class="ti-flickr"></i></a></li>
+                            <li><a href="#"><i class="ti-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- End Single Widget -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer Top -->
+    <div class="copyright">
+        <div class="container">
+            <div class="inner">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <div class="left">
+                            <p>Copyright © 2025 <a href="http://www.wpthemesgrid.com" target="_blank">Malin_Shop</a>  -  Tout droit réservé.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="right">
+                            <img src="{{asset('asset/images/payments.png')}}" alt="#">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}

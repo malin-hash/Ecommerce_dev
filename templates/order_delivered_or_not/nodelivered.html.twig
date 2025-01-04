@@ -1,0 +1,58 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Commande non livrée{% endblock %}
+
+{% block body %}
+    <div class="shopping-cart section">
+        <div class="container">
+            <h1>Toutes les Commanes non livrées</h1><br>
+            <div class="row">
+                <div class="col-12">
+                    <!-- Shopping Summery -->
+                    {% if order == null %}
+                    <div class="col-md-12 mx-auto mt-2">
+                        <div class="alert alert-info alert dimissible fade show">
+                            <p>Aucune commande de dispponible !!!</p>
+                        </div>
+                    </div>
+                    {% else %}
+                    <table class="table shopping-summery">
+                        <thead>
+                            <tr class="main-hading">
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th class="text-center">E-mail</th>
+                                <th class="text-center">Téléohone</th>
+                                <th class="text-center">Pays</th> 
+                                <th class="text-center">Ville</th>
+                                <th class="text-center">Commande</th>
+                                <th class="text-center">Action</th> 
+                            </tr>
+                        </thead>
+                        <tbody>                        
+                                {% for item in order %}
+                                     <tr>
+                                      <td class="product-des" data-title="Description">
+                                          <p class="product-name">{{item.name}}</p>
+                                      </td>
+                                      <td class="product-des" data-title="Description"><p>{{item.firstname}}</p></td>
+                                      <td class="product-des" data-title="Description"><p>{{item.email}}</p></td>
+                                      <td class="product-des" data-title="Description"><p>{{item.phonenumber}}</p></td>
+                                      <td class="product-des" data-title="Description"><p>{{item.country.name}}</p></td>
+                                      <td class="product-des" data-title="Description"><p>{{item.city.name}}</p></td>
+                                      <td class="product-des" data-title="Description"><p ><h6 style="color: red;">Non Livrée</h6></p></td>
+                                      <td class="product-des" data-title="Description">
+                                        <a href="{{path('app_orders_show', {id: item.id})}}"><div class=" btn "> Détails</div></a>
+                                      </td>
+                                 </tr>
+    
+                             {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+        {% endif %}
+    
+            </div>
+        </div>
+    </div>
+{% endblock %}
