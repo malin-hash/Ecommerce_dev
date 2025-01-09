@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\City;
 use App\Entity\Country;
 use App\Entity\User;
-use PhpParser\Node\Stmt\Label;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -29,56 +28,56 @@ class RegistrationFormType extends AbstractType
                 'constraints' =>  [
                     new NotBlank()
                 ]
-                
+
             ])
             ->add('name', TextType::class, [
                 'label' => 'Votre Nom',
                 'constraints' =>  [
                     new NotBlank()
                 ]
-                
+
             ])
             ->add('firstname', TextType::class, [
                 'label' => 'Votre Prénom',
                 'constraints' =>  [
                     new NotBlank()
                 ]
-                
+
             ])
             ->add('streetnumber', IntegerType::class, [
                 'label' => 'Votre Rue',
                 'constraints' =>  [
                     new NotBlank()
                 ]
-                
+
             ])
             ->add('address', TextType::class, [
                 'label' => 'Votre Adresse',
                 'constraints' =>  [
                     new NotBlank()
                 ]
-                
+
             ])
             ->add('phonenumber', IntegerType::class, [
                 'label' => 'Votre Téléphone',
                 'constraints' =>  [
                     new NotBlank()
                 ]
-                
+
             ])
             ->add('country', EntityType::class, [
                 'class' => Country::class,
                 'choice_label' => 'name',
-                'label' =>'Votre Pays'
+                'label' => 'Votre Pays'
             ])
             ->add('City', EntityType::class, [
                 'class' => City::class,
                 'choice_label' => 'name',
-                'label' =>'Votre Ville'
+                'label' => 'Votre Ville'
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
-                'label' =>false,
+                'label' => false,
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
@@ -89,7 +88,7 @@ class RegistrationFormType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'label' =>'Votre Mot de passe',
+                'label' => 'Votre Mot de passe',
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
