@@ -140,10 +140,10 @@
                             <h3 class="cat-heading"><i class="fa fa-bars" aria-hidden="true"></i>Filtres</h3>
                                 <ul class="main-category">
                                 {% for allcategory in allcategories %}
-                                    <li><a href="#">Les accesoires pour {{allcategory.name}}<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                    <li><a href="#">{{allcategory.name}}<i class="fa fa-angle-right" aria-hidden="true"></i></a>
                                         <ul class="sub-category">
                                             {% for subcategory in allcategory.subCategories %}
-                                                <li><a href="#">{{subcategory.name|slice(0,7)}}</a></li>
+                                                <li><a href="#">{{subcategory.name}}</a></li>
                                              {% endfor %}
                                             
                                         </ul>
