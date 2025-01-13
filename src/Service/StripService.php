@@ -20,16 +20,7 @@ class StripService
 
     public function StartPayment($cart, $sessionInterface, $productRepository)
     {
-        // $itemsCart = $cart;
-        // $products = [];
 
-        // foreach ($itemsCart as $value) {
-        //     $productItem = [];
-        //     $productItem['name'] = $value['product']->getName();
-        //     $productItem['price'] = $value['product']->getPrice();
-        //     $productItem['quantity'] = $value['quantity'];
-        //     $products[] = $productItem;
-        // }
         $cart = $sessionInterface->get('cart', []);
 
         $data = [];
@@ -42,7 +33,6 @@ class StripService
                 'quantity' => $quantity,
                 'price' => $product->getPrice()
             ];
-            $total += $product->getPrice() * $quantity;
         }
         $session = Session::create([
             'line_items' => [
@@ -53,7 +43,7 @@ class StripService
                         'product_data' => [
                             'name' => $datas['name']
                         ],
-                        'unit_amount' => $datas['price'] * 655
+                        'unit_amount' => $datas['price']
                     ]
                 ], $data)
             ],
